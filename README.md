@@ -1,6 +1,6 @@
 # SLD4J
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.salesforce.sld4j/sld4j/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/cz.jirutka.rsql/rsql-parser)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.salesforce.sld4j/sld4j/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.salesforce.sld4j/sld4j)
 
 ## SLD
 The Secure Libraries for Developers project ("SLD") is a multi-language project to provide helpful security controls that aid developers and engineers in writing secure code. Every control is designed to be "secure-by-default" and wherever possible "secure-no-matter-what".
