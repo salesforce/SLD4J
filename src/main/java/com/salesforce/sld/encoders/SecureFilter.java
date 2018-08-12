@@ -192,7 +192,7 @@ public class SecureFilter
      * <li>Remove all other characters</li>
      * </ul>
      *
-     * @param input untrusted input to be filterd, if necessary
+     * @param input untrusted input to be filtered, if necessary
      * @return a properly filtered string for the given input, or null if the input is null
      */
     public String filterHtmlInSingleQuoteAttribute( String input )
