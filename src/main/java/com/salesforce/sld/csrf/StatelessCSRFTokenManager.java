@@ -351,7 +351,7 @@ public class StatelessCSRFTokenManager
     public boolean validateToken( String token, String sessionID, String... otherData )
         throws IllegalArgumentException
     {
-        if ( token == null )
+        if ( token == null || token.length() == 0)
         {
             this.handler.handleInternalError( "CSRF token does not exist" );
             return false;
