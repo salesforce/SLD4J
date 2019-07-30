@@ -393,6 +393,14 @@ public class StatelessCSRFTokenManager
             byte[] key = sessionID.getBytes( Charset.defaultCharset() );
 
             byte[] tokenByte = decodeToken( token );
+            if( tokenByte.length < TOKEN_SIZE )
+            {
+                String error = new StringBuffer().append("The format of the CSRF token received is incorrect")
+                    .toString();
+
+                this.handler.handleValidationError( error );
+                return result;
+            }
             byte[] iv = Arrays.copyOfRange( tokenByte, 0, TOKEN_SIZE );
             byte[] encryptedValue = Arrays.copyOfRange( tokenByte, TOKEN_SIZE, tokenByte.length );
 
