@@ -23,6 +23,7 @@ Use the following coordinates
 Control                         | Description
 ------------------------------- | --------------------------
 SecureEncoder/SecureFilter | This pair of controls provides a set of context-based character modifiers that allow application developers to sanitize application data for safe output or processing.
+StatelessCSRFTokenManager | This control generates and validates an encrypted CSRF token based on a user's session key and a timeout. This creates a time-constrained synchronizer token tied to a user's session, but doesn't require stateful storage.
 
 ## License
 Please see the License.txt file
