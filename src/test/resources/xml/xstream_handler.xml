@@ -1,0 +1,8 @@
+<sorted-set>
+	<string>foo</string>
+	<dynamic-proxy>
+		<interface>java.lang.Comparable</interface>
+		<handler class="com.salesforce.sld.xml.xstream.InvocationHandlerMock">
+		</handler>
+	</dynamic-proxy>
+</sorted-set>
