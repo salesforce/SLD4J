@@ -1,0 +1,34 @@
+# Copyright (c) 2020, salesforce.com, inc. All rights reserved. SPDX-License-Identifier: BSD-3-Clause For full license
+# text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+#
+# This is the default deny list of subnets. It blocks known local, private, reserved or non-routable IP address blocks
+# Read more at: https://en.wikipedia.org/wiki/Reserved_IP_addresses
+#
+# Author: hdannouni
+#
+  - 0.0.0.0/32				# INADDR_ANY
+  - 10.0.0.0/8				# Private Network
+  - 100.64.0.0/10			# Shared address space
+  - 127.0.0.0/8				# Localhost IPv4
+  - 168.63.129.16/32		# Azure wireserver IP addresses
+  - 169.254.0.0/16			# Linklocal IPv4
+  - 172.16.0.0/12			# Private network
+  - 192.0.0.0/24			# IANA reserved for Protocol Testing
+  - 192.0.2.0/24			# TEST-NET-1, rfc5737
+  - 192.18.0.0/15			# Private network rfc2544
+  - 192.168.0.0/16			# Private network
+  - 198.51.100.0/24			# TEST-NET-2, rfc5737
+  - 203.0.113.0/24			# TEST-NET-3, rfc5737
+  - 224.0.0.0/4				# Multicast IPv4
+  - 240.0.0.0/4				# Reserved for future use
+  - 255.255.255.255/32		# Limited broadcast IPv4 destination address
+  - ::/128					# IN6ADDR_ANY_INIT
+  - ::1/128					# Localhost v6
+  - 100::/64				# Discard Prefix for IPv6 rfc6666
+  - 2001::/32				# Teredo
+  - 2001:20::/28			# non-routable ORCHIDv2 rfc7343
+  - 2001:db8::/32			# Documentation IPv6 Addresses
+  - fc00::/7				# Private Network
+  - fe80::/10				# Link local addressing
+  - fec0::/10				# Site local addressing. Deprecated in rfc3879
+  - ff00::/8				# Known multicast addresses

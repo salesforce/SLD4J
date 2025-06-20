@@ -1,0 +1,370 @@
+/*
+ * Copyright (c) 2020, salesforce.com, inc. All rights reserved. SPDX-License-Identifier: BSD-3-Clause For full license
+ * text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+package com.salesforce.sld.networking.socketfactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.SocketAddress;
+import java.net.SocketException;
+import java.nio.channels.SocketChannel;
+
+import javax.net.ssl.HandshakeCompletedListener;
+import javax.net.ssl.SSLParameters;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocket;
+
+/**
+ * Secure SSLSocket wrapper. It sets the security features on the underlying
+ * SSL socket using an instance of class SSLParameters as argument to the constructor.
+ * These parameters are configurable using the config.yaml file.
+ * All methods have the default behavior except the ones that attempt to
+ * modify security parameters.
+ * @author akubitkar
+ *
+ */
+public class SecureSSLSocket extends SSLSocket {
+    private final SSLSocket socket;
+
+    /**
+     * Sets the secure parameters on the underlying socket
+     * @param socket Underlying socket to be used on the connection
+     * @param params Secure parameters to be set on the socket
+     */
+    SecureSSLSocket(SSLSocket socket, SSLParameters params){
+        super();
+        this.socket = socket;
+        this.socket.setSSLParameters(params);
+    }
+
+    /**
+     * Overriding security parameters is disallowed. An exception is thrown
+     * if a method tries to modify existing parameters set on the socket.
+     * @param strings An array of strings that sets the allowed set of cipher suites
+     *                on the underlying socket connection
+     */
+    @Override
+    public void setEnabledCipherSuites(String[] strings) {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Overriding security parameters is disallowed. An exception is thrown
+     * if a method tries to modify existing parameters set on the socket.
+     * @param params An instance of class SSLParameters that can be used to set multiple
+     *               security parameters on the underlying socket connection
+     */
+    @Override
+    public void setSSLParameters(SSLParameters params) {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Overriding security parameters is disallowed. An exception is thrown
+     * if a method tries to modify existing parameters set on the socket.
+     * @param strings An array of a strings that sets the allowed set of
+     *                enabled protocols on the underlying socket connection
+     */
+    @Override
+    public void setEnabledProtocols(String[] strings) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SSLSession getHandshakeSession() {
+        return socket.getHandshakeSession();
+    }
+
+    @Override
+    public SSLParameters getSSLParameters() {
+        return socket.getSSLParameters();
+    }
+
+    @Override
+    public String[] getSupportedCipherSuites() {
+        return socket.getSupportedCipherSuites();
+    }
+
+    @Override
+    public String[] getEnabledCipherSuites() {
+        return socket.getEnabledCipherSuites();
+    }
+
+    @Override
+    public String[] getSupportedProtocols() {
+        return socket.getSupportedProtocols();
+    }
+
+    @Override
+    public String[] getEnabledProtocols() {
+        return socket.getEnabledProtocols();
+    }
+
+    @Override
+    public SSLSession getSession() {
+        return socket.getSession();
+    }
+
+    @Override
+    public void addHandshakeCompletedListener(HandshakeCompletedListener handshakeCompletedListener) {
+        socket.addHandshakeCompletedListener(handshakeCompletedListener);
+    }
+
+    @Override
+    public void removeHandshakeCompletedListener(HandshakeCompletedListener handshakeCompletedListener) {
+        socket.removeHandshakeCompletedListener(handshakeCompletedListener);
+    }
+
+    @Override
+    public void startHandshake() throws IOException {
+        socket.startHandshake();
+    }
+
+    @Override
+    public void setUseClientMode(boolean b) {
+        socket.setUseClientMode(b);
+    }
+
+    @Override
+    public boolean getUseClientMode() {
+        return socket.getUseClientMode();
+    }
+
+    @Override
+    public void setNeedClientAuth(boolean b) {
+        socket.setNeedClientAuth(b);
+    }
+
+    @Override
+    public boolean getNeedClientAuth() {
+        return socket.getNeedClientAuth();
+    }
+
+    @Override
+    public void setWantClientAuth(boolean b) {
+        socket.setWantClientAuth(b);
+    }
+
+    @Override
+    public boolean getWantClientAuth() {
+        return socket.getWantClientAuth();
+    }
+
+    @Override
+    public void setEnableSessionCreation(boolean b) {
+        socket.setEnableSessionCreation(b);
+    }
+
+    @Override
+    public boolean getEnableSessionCreation() {
+        return socket.getEnableSessionCreation();
+    }
+
+    @Override
+    public int getLocalPort() {
+        return socket.getLocalPort();
+    }
+
+    @Override
+    public InetAddress getInetAddress() {
+        return socket.getInetAddress();
+    }
+
+    @Override
+    public InetAddress getLocalAddress() {
+        return socket.getLocalAddress();
+    }
+
+    @Override
+    public int getPort() {
+        return socket.getPort();
+    }
+
+    @Override
+    public SocketAddress getRemoteSocketAddress() {
+        return socket.getRemoteSocketAddress();
+    }
+
+    @Override
+    public SocketAddress getLocalSocketAddress() {
+        return socket.getLocalSocketAddress();
+    }
+
+    @Override
+    public void connect(SocketAddress endpoint) throws IOException {
+        socket.connect(endpoint);
+    }
+
+    @Override
+    public void connect(SocketAddress endpoint, int timeout) throws IOException {
+        socket.connect(endpoint, timeout);
+    }
+
+    @Override
+    public void bind(SocketAddress bindpoint) throws IOException {
+        socket.bind(bindpoint);
+    }
+
+    @Override
+    public SocketChannel getChannel() {
+        return socket.getChannel();
+    }
+
+    @Override
+    public InputStream getInputStream() throws IOException {
+        return socket.getInputStream();
+    }
+
+    @Override
+    public OutputStream getOutputStream() throws IOException {
+        return socket.getOutputStream();
+    }
+
+    @Override
+    public void setTcpNoDelay(boolean on) throws SocketException {
+        socket.setTcpNoDelay(on);
+    }
+
+    @Override
+    public boolean getTcpNoDelay() throws SocketException {
+        return socket.getTcpNoDelay();
+    }
+
+    @Override
+    public void setSoLinger(boolean on, int linger) throws SocketException {
+        socket.setSoLinger(on, linger);
+    }
+
+    @Override
+    public int getSoLinger() throws SocketException {
+        return socket.getSoLinger();
+    }
+
+    @Override
+    public void sendUrgentData(int data) throws IOException {
+        socket.sendUrgentData(data);
+    }
+
+    @Override
+    public void setOOBInline(boolean on) throws SocketException {
+        socket.setOOBInline(on);
+    }
+
+    @Override
+    public boolean getOOBInline() throws SocketException {
+        return socket.getOOBInline();
+    }
+
+    @Override
+    public synchronized void setSoTimeout(int timeout) throws SocketException {
+        socket.setSoTimeout(timeout);
+    }
+
+    @Override
+    public synchronized int getSoTimeout() throws SocketException {
+        return socket.getSoTimeout();
+    }
+
+    @Override
+    public synchronized void setSendBufferSize(int size) throws SocketException {
+        socket.setSendBufferSize(size);
+    }
+
+    @Override
+    public synchronized int getSendBufferSize() throws SocketException {
+        return socket.getSendBufferSize();
+    }
+
+    @Override
+    public synchronized void setReceiveBufferSize(int size) throws SocketException {
+        socket.setReceiveBufferSize(size);
+    }
+
+    @Override
+    public synchronized int getReceiveBufferSize() throws SocketException {
+        return socket.getReceiveBufferSize();
+    }
+
+    @Override
+    public void setKeepAlive(boolean on) throws SocketException {
+        socket.setKeepAlive(on);
+    }
+
+    @Override
+    public boolean getKeepAlive() throws SocketException {
+        return socket.getKeepAlive();
+    }
+
+    @Override
+    public void setTrafficClass(int tc) throws SocketException {
+        socket.setTrafficClass(tc);
+    }
+
+    @Override
+    public int getTrafficClass() throws SocketException {
+        return socket.getTrafficClass();
+    }
+
+    @Override
+    public void setReuseAddress(boolean on) throws SocketException {
+        socket.setReuseAddress(on);
+    }
+
+    @Override
+    public boolean getReuseAddress() throws SocketException {
+        return socket.getReuseAddress();
+    }
+
+    @Override
+    public synchronized void close() throws IOException {
+        socket.close();
+    }
+
+    @Override
+    public void shutdownInput() throws IOException {
+        socket.shutdownInput();
+    }
+
+    @Override
+    public void shutdownOutput() throws IOException {
+        socket.shutdownOutput();
+    }
+
+    @Override
+    public String toString() {
+        return socket.toString();
+    }
+
+    @Override
+    public boolean isConnected() {
+        return socket.isConnected();
+    }
+
+    @Override
+    public boolean isBound() {
+        return socket.isBound();
+    }
+
+    @Override
+    public boolean isClosed() {
+        return socket.isClosed();
+    }
+
+    @Override
+    public boolean isInputShutdown() {
+        return socket.isInputShutdown();
+    }
+
+    @Override
+    public boolean isOutputShutdown() {
+        return socket.isOutputShutdown();
+    }
+
+    @Override
+    public void setPerformancePreferences(int connectionTime, int latency, int bandwidth) {
+        socket.setPerformancePreferences(connectionTime, latency, bandwidth);
+    }
+}

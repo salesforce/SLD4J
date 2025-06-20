@@ -1,0 +1,29 @@
+# Copyright (c) 2021, salesforce.com, inc. All rights reserved. SPDX-License-Identifier: BSD-3-Clause For full license
+# text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+#
+# This is the default list of allowed extensions.
+# Read more at: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html#extension-validation
+#
+# Author: sarah.lackey
+#
+
+version: '1.0.0'
+
+allowedExtensions:
+  - ".jpg"
+  - ".jpeg"
+  - ".png"
+  - ".bmp"
+  - ".tif"
+  - ".tiff"
+  - ".gif"
+  - ".svg"
+
+allowedPatterns:
+  - "[a-zA-Z0-9()_.,-]*"
+
+allowedLength: 256
+
+
+
+
